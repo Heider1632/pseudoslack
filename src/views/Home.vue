@@ -1,11 +1,17 @@
 <template>
   <div class="home">
-    <h1>Bienvenido a mi primera app web</h1>
+    <Navbar />
+    <b-container>
+      <Main />
+    </b-container>
   </div>
 </template>
 
 <script>
+import Main from "../components/main.vue";
+import Navbar from "../components/navbar.vue";
 export default {
-  name: "home"
+  name: "home",
+  components: { Navbar, Main }
 };
 </script>

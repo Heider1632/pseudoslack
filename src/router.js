@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
+import Publish from "./views/publish.vue";
 import firebase from "./firebase.js";
 
 Vue.use(Router);
@@ -24,6 +25,14 @@ let router = new Router({
       component: Login,
       meta: {
         requiresGuest: true
+      }
+    },
+    {
+      path: "/publish",
+      name: "publish",
+      component: Publish,
+      meta: {
+        requiresAuth: true
       }
     },
     {

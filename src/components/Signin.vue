@@ -50,8 +50,7 @@ export default {
       firebase.auth
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(
-          user => {
-            alert(user);
+          () => {
             this.$router.push({ path: "/" });
           },
           err => {
