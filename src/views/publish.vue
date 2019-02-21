@@ -4,7 +4,7 @@
     <b-container fluid>
       <div>
         <br />
-        <b-form @submit="sendPublish">
+        <b-form>
           <b-form-group>
             <b-form-input
               type="text"
@@ -31,15 +31,16 @@
             />
           </b-form-group>
 
-          <b-button type="submit" variant="primary">Submit</b-button>
+          <b-button @click="sendPublish" variant="primary">Submit</b-button>
         </b-form>
       </div>
     </b-container>
   </main>
 </template>
 <script>
-import firebase from "../firebase.js";
 import Navbar from "../components/navbar.vue";
+import postPublish from "../components/publish.js";
+import store from "../store.js";
 export default {
   name: "publish",
   components: { Navbar },
@@ -47,23 +48,18 @@ export default {
     return {
       texterror: "",
       textquestion: "",
-      textcode: ""
+      textcode: "",
+      author: store.getters.getUser.user.email
     };
   },
   methods: {
     sendPublish() {
-      firebase.db
-        .collection("publish")
-        .add({
-          texterror: this.texterror,
-          textquestion: this.textquestion,
-          textcode: this.textcode,
-          username: firebase.auth.currentUser.name,
-          id: firebase.auth.currentUser.uid
-        })
-        .then(() => {
-          this.$router.push({ path: "/" });
-        });
+      postPublish(
+        this.textcode,
+        this.texterror,
+        this.textquestion,
+        this.author
+      );
     }
   }
 };

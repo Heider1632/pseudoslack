@@ -1,15 +1,17 @@
 <template>
   <b-row>
-    <b-col v-for="(index, key, p) in publish" :key="key">
-      <b-card>
-        <b-card-header>{{ p.question }}</b-card-header>
-        <b-card-header>{{ p.error }}</b-card-header>
-        <b-card-body>
-          <b-textarea>
-            {{ p.textcode }}
-          </b-textarea>
-        </b-card-body>
+    <b-col v-for="(p, key) in publish" :key="key">
+      <b-card
+        bg-variant="dark"
+        text-variant="white"
+        :title="p.textquestion"
+        :sub-title="p.texterror"
+      >
+        <b-card-text>
+          {{ p.textcode }}
+        </b-card-text>
         <b-card-footer>
+          <span>{{ p.info }}</span>
           <button class="btn btn-primary" id="action">Comentar</button>
         </b-card-footer>
       </b-card>
@@ -21,18 +23,26 @@ import firebase from "../firebase.js";
 export default {
   data: () => {
     return {
-      publish: {}
+      publish: []
     };
   },
   created() {
     firebase.db
       .collection("publish")
-      .get()
-      .then(snapshot => {
-        this.publish = snapshot.value;
+      .orderBy("created_at")
+      .onSnapshot(snapShot => {
+        this.publish = [];
+        snapShot.forEach(publish => {
+          this.publish.push({
+            id: publish.id,
+            textcode: publish.data().textcode,
+            texterror: publish.data().texterror,
+            textquestion: publish.data().textquestion,
+            info: publish.data().info
+          });
+        });
       });
-  },
-  methods: {}
+  }
 };
 </script>
 <style scoped></style>

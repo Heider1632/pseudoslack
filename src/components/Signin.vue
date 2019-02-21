@@ -34,6 +34,7 @@
 
 <script>
 import firebase from "../firebase.js";
+import store from "../store.js";
 export default {
   name: "Signin",
   data() {
@@ -50,8 +51,10 @@ export default {
       firebase.auth
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(
-          () => {
-            this.$router.push({ path: "/" });
+          user => {
+            store.dispatch("PUSH_USER", user).then(() => {
+              this.$router.push({ path: "/" });
+            });
           },
           err => {
             alert(err.message);
