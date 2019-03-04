@@ -16,8 +16,14 @@ firebase.initializeApp(config);
 
 let db = firebase.firestore();
 let auth = firebase.auth();
+var Googleprovider = new firebase.auth.GoogleAuthProvider();
+var Facebookprovider = new firebase.auth.FacebookAuthProvider();
+var Twitterprovider = new firebase.auth.TwitterAuthProvider();
 
 export default {
   db,
-  auth
+  auth,
+  Googleprovider,
+  Facebookprovider,
+  Twitterprovider
 };

@@ -3,7 +3,9 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import Publish from "./views/publish.vue";
+import Publication from "./views/publications.vue";
 import firebase from "./firebase.js";
+import Detalle from "./views/detalle.vue";
 
 Vue.use(Router);
 
@@ -20,6 +22,14 @@ let router = new Router({
       }
     },
     {
+      path: "/detalle",
+      name: "detalle",
+      component: Detalle,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: "/login",
       name: "login",
       component: Login,
@@ -31,6 +41,14 @@ let router = new Router({
       path: "/publish",
       name: "publish",
       component: Publish,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/publications",
+      name: "publications",
+      component: Publication,
       meta: {
         requiresAuth: true
       }

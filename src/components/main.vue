@@ -1,26 +1,37 @@
+<!-- HTML -->
 <template>
   <b-row>
-    <b-col v-for="(p, key) in publish" :key="key">
+    <b-col cols="8" class="pt-4" v-for="(p, key, index) in publish" :key="key">
       <b-card
         bg-variant="dark"
         text-variant="white"
         :title="p.textquestion"
-        :sub-title="p.texterror"
+        @click="
+          $router.push({
+            name: 'detalle',
+            params: { id: p.id, publishProp: p[index] }
+          })
+        "
       >
-        <b-card-text>
-          {{ p.textcode }}
-        </b-card-text>
+        <b-alert variant="danger" show>{{ p.texterror }}</b-alert>
+        <code class="codeblock">
+          <pre>
+            {{ p.textcode }}
+          </pre>
+        </code>
         <b-card-footer>
           <span>{{ p.info }}</span>
-          <button class="btn btn-primary" id="action">Comentar</button>
         </b-card-footer>
       </b-card>
     </b-col>
   </b-row>
 </template>
+
+<!-- javascrip -->
 <script>
 import firebase from "../firebase.js";
 export default {
+  name: "detalle",
   data: () => {
     return {
       publish: []
@@ -45,4 +56,13 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<!-- CSS -->
+<style>
+pre {
+  white-space: pre-wrap;
+  background: whitesmoke;
+  font-size: 1.9em;
+  align-content: center;
+  height: 200px;
+}
+</style>

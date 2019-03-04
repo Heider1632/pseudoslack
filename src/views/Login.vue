@@ -1,16 +1,24 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6 col-sm-12"><Signin /></div>
-      <div class="col-md-6 col-sm-12"><Signup /></div>
+  <main class="bg-login">
+    <b-navbar variant="dark" type="dark">
+      <b-navbar-brand href="#">Pseudoslack</b-navbar-brand>
+    </b-navbar>
+    <div class="container-fluid">
+      <!-- As a link -->
+      <Signin />
     </div>
-  </div>
+  </main>
 </template>
 <script>
 import Signin from "@/components/Signin.vue";
-import Signup from "@/components/Signup.vue";
 export default {
   name: "Login",
-  components: { Signin, Signup }
+  components: { Signin }
 };
 </script>
+<style>
+.bg-login {
+  height: 100vh;
+  background: #00cec9;
+}
+</style>

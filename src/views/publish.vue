@@ -18,17 +18,13 @@
               type="text"
               v-model="texterror"
               required
+              id="input-invalid"
+              :state="false"
               placeholder="you error"
             />
           </b-form-group>
           <b-form-group>
-            <b-form-textarea
-              type="text"
-              rows="7"
-              v-model="textcode"
-              required
-              placeholder="you code"
-            />
+            <b-form-textarea rows="5" v-model="textcode" required />
           </b-form-group>
 
           <b-button @click="sendPublish" variant="primary">Submit</b-button>
@@ -39,7 +35,7 @@
 </template>
 <script>
 import Navbar from "../components/navbar.vue";
-import postPublish from "../components/publish.js";
+import postPublish from "../components/mixins/publish.js";
 import store from "../store.js";
 export default {
   name: "publish",
@@ -49,7 +45,8 @@ export default {
       texterror: "",
       textquestion: "",
       textcode: "",
-      author: store.getters.getUser.user.email
+      author: store.getters.getUser.email,
+      uid: store.getters.getUser.uid
     };
   },
   methods: {
@@ -58,7 +55,8 @@ export default {
         this.textcode,
         this.texterror,
         this.textquestion,
-        this.author
+        this.author,
+        this.uid
       );
     }
   }

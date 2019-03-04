@@ -1,7 +1,7 @@
-import firebase from "../firebase.js";
-import router from "../router";
+import firebase from "../../firebase.js";
+import router from "../../router";
 
-export default (textcode, texterror, textquestion, author) => {
+export default (textcode, texterror, textquestion, author, uid) => {
   let d = new Date();
   let days = [
     "Sunday",
@@ -19,6 +19,7 @@ export default (textcode, texterror, textquestion, author) => {
       textquestion,
       textcode,
       texterror,
+      uid,
       info: `Posted by ${author != "" ? author : "Unknow"} on ${
         days[d.getDay()]
       }`,
